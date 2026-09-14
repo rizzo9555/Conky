@@ -176,11 +176,11 @@ ${color5}${font Fira Code:size=10}> P R O C E S S O R S  ${color3}${hr 2}${font}
 ${color2}CPU Freq:${color6} $alignr${freq}MHz
 ${color2}CPU Usage:${color6} $alignr${cpu cpu0}%
 ${color6}${cpugraph cpu0 35,0 003B00 00FF41 -t}
-${color2}Top Processes${goto 230}cpu%${goto 280}mem%${color}${voffset 4}
-${color2}     1  -  ${top name 1}${color6} ${goto 220}${top cpu 1}${goto 270}${top mem 1}
-${color2}     2  -  ${top name 2}${color6} ${goto 220}${top cpu 2}${goto 270}${top mem 2}
-${color2}     3  -  ${top name 3}${color6} ${goto 220}${top cpu 3}${goto 270}${top mem 3}
-${color2}     4  -  ${top name 4}${color6} ${goto 220}${top cpu 4}${goto 270}${top mem 4}
+${color2}Top Processes${goto 210}cpu%${goto 280}mem${color}${voffset 4}
+${color2}1  -  ${top name 1}${color6} ${goto 200}${top cpu 1}${alignr}${top mem_res 1}
+${color2}2  -  ${top name 2}${color6} ${goto 200}${top cpu 2}${alignr}${top mem_res 2}
+${color2}3  -  ${top name 3}${color6} ${goto 200}${top cpu 3}${alignr}${top mem_res 3}
+${color2}4  -  ${top name 4}${color6} ${goto 200}${top cpu 4}${alignr}${top mem_res 4}
 
 ${color5}${font Fira Code:size=10}> T E M P E R A T U R E S  ${color3}${hr 2}${font}${color}
 ${color2}CPU Temp:${color6} $alignr${execi 10 sensors | grep 'Tctl' | awk '{print $2}'}
