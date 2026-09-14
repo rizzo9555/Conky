@@ -9,7 +9,8 @@ A [Conky](https://github.com/brndnmtthws/conky) theme inspired by the visual sty
 
 > Add a screenshot of your desktop with the conky running here:
 >
-> `![preview](docs/preview.png)`
+> ![preview](Conky.png)
+> ![Desktop](Desktop.png)
 
 ## Features
 
