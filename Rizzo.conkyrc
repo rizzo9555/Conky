@@ -207,6 +207,7 @@ ${offset 30}${color2}I/O Write:${color6} ${alignr}${offset -10}${diskio_write /d
 #${offset 30}${color2}I/O Write:${color6} ${alignr}${offset -10}${diskio_write /dev/nvme0n1p2}${alignr}${diskiograph_write nvme0n1p2 8,100}
 
 ${color5}${font Fira Code:size=10}> N E T W O R K   ${color3}${hr 2}${font}${color}
+${color2}${offset 30}IP IPv4: ${color6} ${alignr}${offset -10}${execi 3600 curl -4 -s https://ifconfig.me}
 ${color2}${offset 30}IP Gateway: ${color6} ${alignr}${offset -10}${gw_ip}
 
 # --- Ethernet (enp5s0) ---
