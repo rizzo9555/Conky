@@ -1,42 +1,41 @@
 # Rizzo Matrix Conky
 
-Um tema para [Conky](https://github.com/brndnmtthws/conky) inspirado no visual do filme **Matrix**: fundo transparente, verde fosforescente, fonte monoespaçada e um relógio digital em destaque. Construído em cima de um `.conkyrc` já otimizado para monitorar CPU, memória, temperaturas, discos, rede e GPU NVIDIA.
+A [Conky](https://github.com/brndnmtthws/conky) theme inspired by the visual style of the movie **The Matrix**: transparent background, phosphorescent green, monospaced font, and a big digital clock front and center. Built on top of an already-optimized `.conkyrc` that monitors CPU, memory, temperatures, disks, network, and NVIDIA GPU.
 
 ![status](https://img.shields.io/badge/conky-1.22.2-00FF41?style=flat-square&labelColor=000000)
 ![license](https://img.shields.io/badge/license-GPLv2-00FF41?style=flat-square&labelColor=000000)
 
 ## Preview
 
-> Screenshot:
->
-> `![preview](docs/preview.png)`
+> `![preview](Desktop.png)`
+> `![Conky] (Conky.png)`
 
-## Recursos
+## Features
 
-- 🟢 Paleta de cores estilo Matrix (`#00FF41` / `#39FF14` sobre fundo preto transparente)
-- ⏰ Relógio grande no topo, estilo contador digital, com data e segundos
-- 🖥️ Uso geral de CPU (não por núcleo) + frequência + gráfico
-- 🧠 RAM e Swap em linhas separadas, com barra de uso
-- 🌡️ Seção dedicada de temperaturas (CPU, NVMe/SSD e GPU)
-- 📊 Top 4 processos por uso de CPU, com memória exibida em MB/GB (alinhada à direita)
-- 💾 Uso de disco e I/O de leitura/escrita (NVMe)
-- 🌐 Status de rede para Ethernet (`enp5s0`) e Wi-Fi (`wlp6s0`)
-- 🎮 Métricas completas de GPU via `nvidia-smi` (temperatura, clocks, VRAM, consumo, uso)
-- ▓▒░ Separadores e prefixos que remetem a um terminal
+- 🟢 Matrix-style color palette (`#00FF41` / `#39FF14` on a transparent black background)
+- ⏰ Big digital-counter-style clock at the top, with date and seconds
+- 🖥️ Overall CPU usage (not per-core) + frequency + graph
+- 🧠 RAM and Swap on separate lines, with usage bars
+- 🌡️ Dedicated temperatures section (CPU, NVMe/SSD, and GPU)
+- 📊 Top 4 processes by CPU usage, with memory shown in MB/GB (right-aligned)
+- 💾 Disk usage and read/write I/O (NVMe)
+- 🌐 Network status for Ethernet (`enp5s0`) and Wi-Fi (`wlp6s0`)
+- 🎮 Full GPU metrics via `nvidia-smi` (temperature, clocks, VRAM, power draw, usage)
+- ▓▒░ Separators and prefixes that evoke a terminal
 
-## Requisitos
+## Requirements
 
-| Componente | Observação |
+| Component | Note |
 |---|---|
-| [Conky](https://github.com/brndnmtthws/conky) | testado na versão 1.22.2 |
-| Fonte **Fira Code** | usada em todo o tema |
-| `lm-sensors` | para as temperaturas de CPU/NVMe (comando `sensors`) |
-| Driver NVIDIA + `nvidia-smi` | para a seção de GPU |
-| `x11-xserver-utils` | opcional, usado no autostart via systemd (comando `xset`) |
+| [Conky](https://github.com/brndnmtthws/conky) | tested on version 1.22.2 |
+| **Fira Code** font | used throughout the theme |
+| `lm-sensors` | for CPU/NVMe temperatures (`sensors` command) |
+| NVIDIA driver + `nvidia-smi` | for the GPU section |
+| `x11-xserver-utils` | optional, used for systemd autostart (`xset` command) |
 
-## Instalação
+## Installation
 
-### 1. Instalar a fonte Fira Code
+### 1. Install the Fira Code font
 
 ```bash
 sudo apt update
@@ -44,27 +43,27 @@ sudo apt install fonts-firacode
 fc-cache -fv
 ```
 
-Confirme que foi reconhecida:
+Confirm it was picked up:
 
 ```bash
 fc-list | grep -i "fira code"
 ```
 
-### 2. Instalar dependências
+### 2. Install dependencies
 
 ```bash
 sudo apt install conky-all lm-sensors x11-xserver-utils
-sudo sensors-detect   # responda "yes" às perguntas padrão
+sudo sensors-detect   # answer "yes" to the default prompts
 ```
 
-### 3. Copiar o arquivo de configuração
+### 3. Copy the config file
 
 ```bash
 mkdir -p ~/.config/conky
 cp Rizzo.conkyrc ~/.config/conky/Rizzo.conkyrc
 ```
 
-### 4. Testar
+### 4. Test it
 
 ```bash
 conky -c ~/.config/conky/Rizzo.conkyrc
@@ -72,12 +71,12 @@ conky -c ~/.config/conky/Rizzo.conkyrc
 
 ## Autostart (systemd user service)
 
-O Ubuntu 26.04 não traz mais a GUI de "Startup Applications", então o autostart é feito via **serviço de usuário do systemd**. Pontos importantes descobertos durante os testes:
+Ubuntu 26.04 no longer ships the "Startup Applications" GUI, so autostart is handled through a **systemd user service**. Key points discovered during testing:
 
-- `background = false` no `.conkyrc` — necessário para o systemd rastrear o processo corretamente (`background = true` faz o Conky virar daemon e "some" do systemd)
-- Verificação de tela pronta com `xset q`, seguida de um `sleep 10` para dar tempo do XWayland, drivers e compositor estabilizarem antes do Conky desenhar
+- `background = false` in the `.conkyrc` — required so systemd can track the process correctly (`background = true` makes Conky daemonize and "disappear" from systemd's view)
+- A display-readiness check with `xset q`, followed by a `sleep 10`, to give XWayland, drivers, and the compositor time to stabilize before Conky starts drawing
 
-Exemplo de unit (`~/.config/systemd/user/conky.service`):
+Example unit (`~/.config/systemd/user/conky.service`):
 
 ```ini
 [Unit]
@@ -94,37 +93,37 @@ Restart=on-failure
 WantedBy=graphical-session.target
 ```
 
-Ativar:
+Enable it:
 
 ```bash
 systemctl --user daemon-reload
 systemctl --user enable --now conky.service
 ```
 
-## Personalização
+## Customization
 
-### Cores (Matrix theme)
+### Colors (Matrix theme)
 
-| Variável | Cor | Uso |
+| Variable | Color | Used for |
 |---|---|---|
-| `default_color` / `color2` / `color5` | `#00FF41` | texto padrão, labels, cabeçalhos |
-| `color1` | `#008F11` | contorno/preenchimento de gráficos |
-| `color3` | `#003B00` | fundo escuro, separadores |
-| `color4` | `#39FF14` | destaques (data) |
-| `color6` | `#E0FFE0` | relógio, nomes de processos |
-| `color7` / `color8` / `color9` | verde / laranja / vermelho | sinalização (ok / aviso / alerta) |
+| `default_color` / `color2` / `color5` | `#00FF41` | default text, labels, section headers |
+| `color1` | `#008F11` | graph outline/fill |
+| `color3` | `#003B00` | dark background, separators |
+| `color4` | `#39FF14` | highlights (date) |
+| `color6` | `#E0FFE0` | clock, process names |
+| `color7` / `color8` / `color9` | green / orange / red | status signaling (ok / warning / alert) |
 
-### Ajustes comuns
+### Common tweaks
 
-- **Temperatura da NVMe**: a linha `NVMe Temp` depende do rótulo retornado pelo `sensors` no seu sistema. Rode `sensors` no terminal e ajuste o `grep` (ex.: `nvme-pci-0400`) se a linha não aparecer.
-- **Interfaces de rede**: troque `enp5s0` e `wlp6s0` pelos nomes das suas interfaces (`ip a` para conferir).
-- **Discos monitorados**: existem blocos comentados no arquivo para adicionar discos extras — basta descomentar e ajustar o ponto de montagem.
-- **Tamanho/posição da janela**: `minimum_width`, `maximum_width`, `gap_x`, `gap_y` e `alignment` no bloco `conky.config`.
+- **NVMe temperature**: the `NVMe Temp` line depends on the label returned by `sensors` on your system. Run `sensors` in a terminal and adjust the `grep` (e.g. `nvme-pci-0400`) if the line doesn't show up.
+- **Network interfaces**: replace `enp5s0` and `wlp6s0` with your own interface names (`ip a` to check).
+- **Monitored drives**: the file includes commented-out blocks for extra drives — just uncomment and adjust the mount point.
+- **Window size/position**: `minimum_width`, `maximum_width`, `gap_x`, `gap_y`, and `alignment` in the `conky.config` block.
 
-## Créditos
+## Credits
 
-Baseado no tema original do ArcoLinux (Erik Dubois), com as modificações "Titus" e as customizações "Rizzo" (Matrix theme) descritas no cabeçalho do próprio arquivo `Rizzo.conkyrc`.
+Based on the original ArcoLinux theme (Erik Dubois), with the "Titus" modifications and the "Rizzo" customizations (Matrix theme) described in the header of the `Rizzo.conkyrc` file itself.
 
-## Licença
+## License
 
-Distribuído sob os termos da GNU GPL v2 ou posterior, conforme o arquivo original.
+Distributed under the terms of the GNU GPL v2 or later, as in the original file.
