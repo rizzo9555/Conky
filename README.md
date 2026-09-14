@@ -7,8 +7,9 @@ A [Conky](https://github.com/brndnmtthws/conky) theme inspired by the visual sty
 
 ## Preview
 
-> `![preview](Desktop.png)`
-> `![Conky] (Conky.png)`
+![preview](Desktop.png)
+![Conky](Conky.png)
+
 
 ## Features
 
